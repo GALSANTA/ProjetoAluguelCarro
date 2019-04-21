@@ -11,6 +11,50 @@
  */
 class Cliente extends Model{
 
+	public function getCliente($filtro,$valor){
+		if ($filtro == 0) {
+
+ 			$sql="SELECT * FROM tb_clientes WHERE nome = :valor";
+
+ 		}
+ 		if ($filtro == 1) {
+ 			
+ 			$sql="SELECT * FROM tb_clientes WHERE rg = :valor";
+ 		}
+ 		if ($filtro == 2) {
+ 			
+ 			$sql="SELECT * FROM tb_clientes WHERE cpf = :valor";
+ 		}
+
+
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":valor",$valor);
+		$sql->execute();
+
+
+
+		if ($sql->rowCount()>0) {
+			
+			return $sql->fetchAll();
+		}
+		else{
+			return 0;
+		}
+	}
+
+	public function getClientes(){
+
+		$sql="SELECT * FROM tb_clientes";
+		$sql=$this->pdo->query($sql);
+
+		if ($sql->rowCount()>0) {
+			return $sql->fetchAll();
+		}
+		else{
+			return 0;
+		}
+	}
+
  	public function verificarCliente($cpf){
 
  		$sql="SELECT id_cliente FROM tb_clientes WHERE cpf=:cpf";
@@ -22,7 +66,7 @@ class Cliente extends Model{
 			return $sql->fetch();
 		}
 		else{
-			return 0;
+			return false;
 		}
 
 

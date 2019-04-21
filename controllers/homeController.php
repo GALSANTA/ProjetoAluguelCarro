@@ -23,6 +23,7 @@ class homeController extends Controller{
 
 		$this->loadTemplate('home',$dados);		
 	}
+	
 	public function busca_rapida(){
 		$dados = array();
 
