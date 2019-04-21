@@ -16,8 +16,43 @@ class agendaController extends Controller{
 		$dados = array();
 
 		$reserva = new Reserva();
+		$carro = new Carro();
+		$cliente = new Cliente();
 
+		$dados['carros'] = $carro->getCarros();
 		$data =date('Y-m');
+
+
+		if (!empty($_POST['carro'])) {
+
+			$carro = addslashes($_POST['carro']);
+			$data_inicio = explode("/", addslashes($_POST['data_inicio']));
+			$data_fim =explode("/",addslashes($_POST['data_fim']));
+			$nome = addslashes($_POST['nome']);
+			$rg = addslashes($_POST['rg']);
+			$cpf = addslashes($_POST['cpf']);
+			$numero1 = addslashes($_POST['numero1']);
+			$numero2 = addslashes($_POST['numero2']);
+
+
+
+			$data_inicio = $data_inicio[2]."-".$data_inicio[1]."-".$data_inicio[0];
+			$data_fim = $data_fim[2]."-".$data_fim[1]."-".$data_fim[0];
+
+			if ($reserva->verificarDisponibilidade($carro,$data_inicio,$data_fim)) {
+
+				$id_cliente = $cliente->cadastrarCliente($nome,$rg,$cpf,$numero1,$numero2);
+				$id_cliente = $id_cliente[0];
+				$reserva->reservar($carro,$id_cliente,$data_inicio,$data_fim);
+
+				header("Location:BASE_URL/agenda/index");
+			}
+			else{
+				echo "sem reserva";
+				
+			}
+
+		}
 
 		if (isset($_POST['ano']) && !empty($_POST['ano'])) {
 			
@@ -42,9 +77,10 @@ class agendaController extends Controller{
 
 		$this->loadTemplate('agenda',$dados);
 	}
-	public function add_reserva(){
+/*	public function add_reserva(){
 
 		$dados = array();
+
 
 		$reserva = new Reserva();
 		$carro = new Carro();
@@ -83,14 +119,11 @@ class agendaController extends Controller{
 				
 			}
 
-
-
 		}
-
 
 		$this->loadTemplate('add_reserva',$dados);
 	
-	}
+	}*/
 	public function editar_reserva($id_aluguel){
         $dados = array();
 

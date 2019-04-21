@@ -7,7 +7,7 @@
 		<div class="col-6">
 			<div class="row">
 				<div class="col">
-					<a class="link"  href="<?php BASE_URL ?>home/busca_rapida">
+					<a class="link"  href="<?php echo BASE_URL ?>home/busca_rapida">
 						<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">Busca Rápida</h5>
@@ -17,7 +17,7 @@
 					</a>
 				</div>
 				<div class="col">
-					<a class="link" href="<?php BASE_URL ?>carros/">
+					<a class="link" href="<?php echo BASE_URL ?>carros/">
 						<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">Carros</h5>
@@ -29,7 +29,7 @@
 			</div>
 			<div  class="row">
 				<div class="col">
-					<a class="link"  href="<?php BASE_URL ?>clientes/">
+					<a class="link"  href="<?php echo BASE_URL ?>clientes/">
 						<div  class="card text-white bg-dark mb-3" style="max-width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">Clientes</h5>
@@ -39,7 +39,7 @@
 					</a>
 				</div>
 				<div class="col">
-					<a class="link"  href="<?php BASE_URL ?>agenda/">
+					<a class="link"  href="<?php echo BASE_URL ?>agenda/">
 						<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">Agenda</h5>

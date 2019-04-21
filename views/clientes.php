@@ -22,9 +22,6 @@
 					<br>
 					<input class="btn btn-dark" type="submit" value="Buscar">
 				</form>
-
-		
-
 			</fieldset>
 		</div>
 	</div>
