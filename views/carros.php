@@ -25,7 +25,7 @@
 			</fieldset>
 		</div>
 		<div class="col-6">
-			<a class="link" href="<?php echo BASE_URL;?>carros/add_carro" data-toggle="modal" data-target="#exampleModal">
+			<a class="link" id="linkmodal" href="<?php echo BASE_URL;?>carros/add_carro" data-toggle="modal" data-target="#exampleModal">
 				<div id="link2" class="card text-white bg-dark mb- mx-auto mt-4" style="max-width: 18rem;">
 					<div class="card-body">
 						<h2 class="card-title">Adicionar Carro</h2>
@@ -77,34 +77,9 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form method="POST">
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-6">
-							<label for="marca">Marca</label>
-							<input type="text" class="form-control" id="marca" placeholder="Marca" name="marca"><br><br>
-						</div>
-						<div class="col-6">
-							<label for="modelo">Modelo</label>
-							<input type="text" class="form-control" id="modelo" placeholder="Modelo" name="modelo"><br><br>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
-							<label for="placa">Placa</label>
-							<input type="text" class="form-control" id="placa" placeholder="Placa" name="placa"><br><br>
-						</div>
-						<div class="col-6">
-							<label for="valor">Valor da diária</label>
-							<input type="text" class="form-control" id="valor" placeholder="Valor" name="valor"><br><br>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<input type="submit"  class="btn btn-dark" value="Cadastrar Carro">
-				</div>
-			</form>
+			<div class="modal-body">
+				
+			</div>
 		</div>
 	</div>
 </div>

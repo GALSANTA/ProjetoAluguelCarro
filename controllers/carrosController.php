@@ -20,26 +20,6 @@ class homeController extends Controller{
 
 		$dados['carros']= $carro->getCarros();
 
-
-		//Add carro
-
-		if (isset($_POST['marca']) && !empty($_POST['marca'])) {
-
-			$marca = $_POST['marca'];
-			$modelo = $_POST['modelo'];
-			$placa = $_POST['placa'];
-			$valor = $_POST['valor'];
-
-
-			if (empty($modelo) OR empty($placa)) {
-				
-				header("Location:index");
-			}
-			$carro = new Carro();
-			$carro->addCarro($marca,$modelo,$placa,$valor);
-			header("Location:index");
-			
-		}
 		
 		if (isset($_POST['nomefiltro']) && !empty($_POST['nomefiltro'])) {
 
@@ -61,6 +41,31 @@ class homeController extends Controller{
 		$this->loadTemplate('carros',$dados);
 
 
+	}
+	public function add_carro(){
+		$dados = array();
+
+		if (isset($_POST['marca']) && !empty($_POST['marca'])) {
+
+			$marca = $_POST['marca'];
+			$modelo = $_POST['modelo'];
+			$placa = $_POST['placa'];
+			$valor = $_POST['valor'];
+
+
+			if (empty($modelo) OR empty($placa)) {
+				
+				header("Location:index");
+			}
+
+			$carro = new Carro();
+			$carro->addCarro($marca,$modelo,$placa,$valor);
+			header("Location:index");
+			
+		}
+
+		
+		$this->loadView('add_carro',$dados);
 	}
 	public function editar($id_carro){
 
@@ -95,12 +100,7 @@ class homeController extends Controller{
 
 		header("Location:".BASE_URL."carros/index");
 	}
-/*	public function add_carro(){
-		$dados = array();
 
-		
-		$this->loadTemplate('add_carro',$dados);
-	}*/
 
 	
 	

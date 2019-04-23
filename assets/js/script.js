@@ -13,7 +13,7 @@ $(function(){
 		}
 
 		);
-    
+
 	// Model
 	$('#myModal').on('shown.bs.modal', function () {
 
@@ -23,4 +23,31 @@ $(function(){
 
 	});
 
+    //AJAX prototipo
+	$('#linkmodal').on('click', function(e){
+		e.preventDefault();
+		var link = $(this).attr('href'); 
+		$.ajax({
+			type:'GET',
+			url:link,
+			success:function(html){
+				$('.modal-body').html(html);
+				$('#form').bind('submit',function(){
+					e.preventDefault(); 
+					var txt = $('#form').serialize();
+					$.ajax({ 
+						type:'POST',
+						url:link,
+						data:txt
+					});
+				});
+			}
+		});
+		
+		
+
+	});
+	
+
 });
+
