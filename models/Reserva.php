@@ -36,24 +36,66 @@ class Reserva extends Model{
 	public function getReserva($id_aluguel){
 
 		$sql="SELECT *
-		 FROM tb_aluguel
-		 JOIN tb_clientes ON tb_clientes.id_cliente=tb_aluguel.id_cliente
-		 WHERE id_aluguel = :id_aluguel";
+		FROM tb_aluguel
+		JOIN tb_clientes ON tb_clientes.id_cliente=tb_aluguel.id_cliente
+		WHERE id_aluguel = :id_aluguel";
 		$sql=$this->pdo->prepare($sql);
 		$sql->bindValue(":id_aluguel",$id_aluguel);
 		$sql->execute();
 
 		$array=array();
 
- 		if ($sql->rowCount()>0) {
+		if ($sql->rowCount()>0) {
 
- 			$array = $sql->fetch();
- 			
- 		}
- 		return $array;
+			$array = $sql->fetch();
+
+		}
+		return $array;
 
 	}
-	public function verificarDisponibilidade($carro,$data_inicio,$data_fim){
+	public function verificarIndisponibilidade($data){
+		
+		$valor = array();
+
+		$sql="SELECT id_carro FROM `tb_aluguel` WHERE data_inicio<=:data AND data_fim>=:data";
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":data",$data);
+		$sql->execute();
+
+		if ($sql->rowCount()>0) {
+
+			$carro = new Carro();
+
+			$valor = $sql->fetchAll();
+			
+			for ($i=0; $i < sizeof($valor); $i++) { 
+				$carro->inserirIndisponibilidade($valor[0]['id_carro']);
+			}
+		}
+
+	}
+	public function verificarDisponibilidade($data){
+		
+		$valor = array();
+
+		$sql="SELECT id_carro FROM `tb_aluguel` WHERE NOT(data_inicio<=:data AND data_fim>=:data)";
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":data",$data);
+		$sql->execute();
+
+		if ($sql->rowCount()>0) {
+
+			$carro = new Carro();
+
+			$valor = $sql->fetchAll();
+			
+			for ($i=0; $i < sizeof($valor); $i++) { 
+				$carro->inserirDisponibilidade($valor[0]['id_carro']);
+			}
+		}
+
+	}
+	public function verificarCarroDisponibilidade($carro,$data_inicio,$data_fim){
 
 		$sql="
 		SELECT * 
@@ -90,44 +132,15 @@ class Reserva extends Model{
 	}
 	public function excluirReserva($id_aluguel){
 		$sql = "DELETE FROM tb_aluguel WHERE id_aluguel = :id_aluguel";
- 		$sql=$this->pdo->prepare($sql);
- 		$sql->bindValue(":id_aluguel",$id_aluguel);
- 		$sql->execute();
-	}
-
-	public function getDisponiveis($data){
-
-		$valor =0;
-
-		$sql="SELECT COUNT(id_carro) FROM `tb_aluguel` WHERE NOT(data_inicio<=:data AND data_fim>=:data)
-		";
- 		$sql=$this->pdo->prepare($sql);
-		$sql->bindValue(":data",$data);
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":id_aluguel",$id_aluguel);
 		$sql->execute();
-
-		if ($sql->rowCount()>0) {
-			$valor = $sql->fetch();
-
-		}
-		return $valor;
-
 	}
-	public function getAlugados($data){
 
-		$valor =0;
 
-		$sql="SELECT COUNT(id_carro) FROM `tb_aluguel` WHERE data_inicio<=:data AND data_fim>=:data
-		";
- 		$sql=$this->pdo->prepare($sql);
-		$sql->bindValue(":data",$data);
-		$sql->execute();
 
-		if ($sql->rowCount()>0) {
-			$valor = $sql->fetch();
 
-		}
-		return $valor;
-	}
+
 	
 	
 }

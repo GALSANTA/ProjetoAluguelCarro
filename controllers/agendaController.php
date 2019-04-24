@@ -75,7 +75,7 @@ class agendaController extends Controller{
 			$data_inicio = $data_inicio[2]."-".$data_inicio[1]."-".$data_inicio[0];
 			$data_fim = $data_fim[2]."-".$data_fim[1]."-".$data_fim[0];
 
-			if ($reserva->verificarDisponibilidade($carro,$data_inicio,$data_fim)) {
+			if ($reserva->verificarCarroDisponibilidade($carro,$data_inicio,$data_fim)) {
 
 				$id_cliente = $cliente->cadastrarCliente($nome,$rg,$cpf,$numero1,$numero2);
 				$id_cliente = $id_cliente[0];

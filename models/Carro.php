@@ -141,6 +141,42 @@ class Carro extends Model{
  		$sql->execute();
 
  	}
+ 	public function inserirIndisponibilidade($id_carro){
+		$sql="UPDATE `tb_carros` SET `status`=1 WHERE id_carro=:id_carro";
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":id_carro",$id_carro);
+		$sql->execute();
+	}
+	 	public function inserirDisponibilidade($id_carro){
+		$sql="UPDATE `tb_carros` SET `status`=0 WHERE id_carro=:id_carro";
+		$sql=$this->pdo->prepare($sql);
+		$sql->bindValue(":id_carro",$id_carro);
+		$sql->execute();
+	}
+ 	public function getDisponiveis(){
+
+		$sql="SELECT COUNT(id_carro) FROM `tb_carros` WHERE status = 0";
+ 		$sql=$this->pdo->query($sql);
+
+		if ($sql->rowCount()>0) {
+			
+			$valor = $sql->fetch();
+
+		}
+		return $valor;
+
+	}
+	public function getAlugados(){
+
+		$sql="SELECT COUNT(id_carro) FROM `tb_carros` WHERE status = 1";
+ 		$sql=$this->pdo->query($sql);
+
+		if ($sql->rowCount()>0) {
+			$valor = $sql->fetch();
+
+		}
+		return $valor;
+	}
 
 
 

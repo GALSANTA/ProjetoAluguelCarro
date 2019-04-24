@@ -14,11 +14,15 @@ class homeController extends Controller{
 	public function index(){
 
 		$reserva = new Reserva();
+		$carro = new Carro();
 		$dados = array();
 		$data =date('Y-m-d');
 
-		$dados['disponiveis']=$reserva->getDisponiveis($data);
-		$dados['alugados']=$reserva->getAlugados($data);
+		$reserva->verificarIndisponibilidade($data);
+		$reserva->verificarDisponibilidade($data);
+
+		$dados['disponiveis']=$carro->getDisponiveis();
+		$dados['alugados']=$carro->getAlugados();
 	
 
 		$this->loadTemplate('home',$dados);		
