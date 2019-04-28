@@ -82,7 +82,7 @@
 							$dr_fim = strtotime($reserva['data_fim']);
 
 							if ($w >= $dr_inicio && $w <= $dr_fim) {
-								echo $reserva['nome'].":".$reserva['modelo']."-->".$reserva['placa']."<a href='".BASE_URL."agenda/editar_reserva/".$reserva['id_aluguel']."'>editar</a>-<a href='".BASE_URL."agenda/excluir_reserva/".$reserva['id_aluguel']."'>exluir</a>";
+								echo $reserva['nome'].":".$reserva['modelo']."-->".$reserva['placa']."--<a href='".BASE_URL."agenda/editar_reserva/".$reserva['id_aluguel']."'>editar</a>-<a href='".BASE_URL."agenda/excluir_reserva/".$reserva['id_aluguel']."'>exluir</a></br>";
 							}
 
 
@@ -172,8 +172,7 @@
 					<input type="submit"  class="btn btn-dark"  value="Reservar">
 				</div>
 			</form>
-			</div>
 		</div>
 	</div>
 </div>
-
+</div>
