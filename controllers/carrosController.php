@@ -29,22 +29,14 @@ class homeController extends Controller{
 			if (empty($_POST['nomefiltro'])) {
 				$valor="";
 			}
-			 if ($carro->filtroCarros($filtro,$valor)) {
+			if ($carro->filtroCarros($filtro,$valor)) {
 
-            	$dados['carros'] = $carro->filtroCarros($filtro,$valor);
-            }else{
-            	echo "Não há carros";
-            }
+				$dados['carros'] = $carro->filtroCarros($filtro,$valor);
+			}else{
+				echo "Não há carros";
+			}
 
 		}
-		
-		$this->loadTemplate('carros',$dados);
-
-
-	}
-	public function add_carro(){
-		$dados = array();
-
 		if (isset($_POST['marca']) && !empty($_POST['marca'])) {
 
 			$marca = $_POST['marca'];
@@ -55,34 +47,37 @@ class homeController extends Controller{
 
 			if (empty($modelo) OR empty($placa)) {
 				
-				header("Location:index");
+				header("Location:".BASE_URL."carros/index");
+				
 			}
 
-			$carro = new Carro();
 			$carro->addCarro($marca,$modelo,$placa,$valor);
-			header("Location:index");
+			header("Location:".BASE_URL."carros/index");
 			
 		}
 
 		
-		$this->loadView('add_carro',$dados);
+		$this->loadTemplate('carros',$dados);
+
+
 	}
+
 	public function editar($id_carro){
 
 		$dados = array();
 
 		$carro = new Carro();
 
-        $dados['carro']=$carro->getCarro($id_carro);
+		$dados['carro']=$carro->getCarro($id_carro);
 
 		if (isset($_POST['marca']) && !empty($_POST['marca'])) {
 			
-            $marca = $_POST['marca'];
+			$marca = $_POST['marca'];
 			$modelo = $_POST['modelo'];
 			$placa = $_POST['placa'];
 			$valor = $_POST['valor'];
 
-           
+			
 			$carro->editarCarro($id_carro,$marca,$modelo,$placa,$valor);
 
 			header("Location:".BASE_URL."carros/index");

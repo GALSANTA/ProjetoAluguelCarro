@@ -20,6 +20,7 @@ class agendaController extends Controller{
 		$cliente = new Cliente();
 
 		$data =date('Y-m');
+		$dados['carros'] = $carro->getCarros();
 
 
 
@@ -29,35 +30,6 @@ class agendaController extends Controller{
 			$mes = $_POST['mes'];
 			$data = $ano."-".$mes;
 		}
-		$dia1 = date('w',strtotime($data));
-		$dias = date('t',strtotime($data));
-		$linhas = ceil(($dias+$dia1)/7);
-		$dia1 = -$dia1;
-		$data_inicio = date('Y-m-d',strtotime($dia1.' days',strtotime($data)));
-		$data_fim = date('Y-m-d',strtotime(($dia1+($linhas*7)-1).' days',strtotime($data)));
-
-
-		
-		$dados['data'] = $data;
-		$dados['data_inicio'] = $data_inicio;
-		$dados['data_fim'] = $data_fim;
-		$dados['linhas'] = $linhas;
-		$dados['reservas'] = $reserva->getReservas($data_inicio,$data_fim);
-
-		$this->loadTemplate('agenda',$dados);
-	}
-	public function add_reserva(){
-
-		$dados = array();
-
-
-		$reserva = new Reserva();
-		$carro = new Carro();
-		$cliente = new Cliente();
-
-
-		$dados['carros'] = $carro->getCarros();
-
 
 		if (!empty($_POST['carro'])) {
 
@@ -81,7 +53,7 @@ class agendaController extends Controller{
 				$id_cliente = $id_cliente[0];
 				$reserva->reservar($carro,$id_cliente,$data_inicio,$data_fim);
 
-				header("Location:index");
+				header("Location:".BASE_URL."agenda/index");
 			}
 			else{
 				echo "sem reserva";
@@ -89,6 +61,30 @@ class agendaController extends Controller{
 			}
 
 		}
+
+
+
+		$dia1 = date('w',strtotime($data));
+		$dias = date('t',strtotime($data));
+		$linhas = ceil(($dias+$dia1)/7);
+		$dia1 = -$dia1;
+		$data_inicio = date('Y-m-d',strtotime($dia1.' days',strtotime($data)));
+		$data_fim = date('Y-m-d',strtotime(($dia1+($linhas*7)-1).' days',strtotime($data)));
+
+
+		
+		$dados['data'] = $data;
+		$dados['data_inicio'] = $data_inicio;
+		$dados['data_fim'] = $data_fim;
+		$dados['linhas'] = $linhas;
+		$dados['reservas'] = $reserva->getReservas($data_inicio,$data_fim);
+
+		$this->loadTemplate('agenda',$dados);
+	}
+	public function add_reserva(){
+
+		$dados = array();
+		
 
 		$this->loadView('add_reserva',$dados);
 	

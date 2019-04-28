@@ -11,30 +11,6 @@
  */
 class Carro extends Model{
 
- 	/*private $marca;
- 	private $modelo;
- 	private $placa;*/
-
- 	//gets and sets
-
- 	/*public function getMarca(){
- 		return $marca;
- 	}
- 	public function setMarca($marca){
- 		$this->marca = $marca;
- 	}
- 	public function getModelo(){
- 		return $modelo;
- 	}
- 	public function setModelo($modelo){
- 		$this->modelo = $modelo;
- 	}
- 	public function getPlaca(){
- 		return $placa;
- 	}
- 	public function setPlaca($placa){
- 		$this->placa = $placa;
- 	}*/
 
  	//funções que se conectam com a tablela
 
@@ -108,14 +84,15 @@ class Carro extends Model{
  	}
  	public function addCarro($marca,$modelo,$placa,$valor){
 
+ 
  		$sql="INSERT INTO `tb_carros`(`marca`, `modelo`, `placa`,`valor`) VALUES (:marca,:modelo,:placa,:valor)";
  		$sql=$this->pdo->prepare($sql);
  		$sql->bindValue(":marca",$marca);
  		$sql->bindValue(":modelo",$modelo);
  		$sql->bindValue(":placa",$placa);
  		$sql->bindValue(":valor",$valor);
-
  		$sql->execute();
+
 
  	}
 
