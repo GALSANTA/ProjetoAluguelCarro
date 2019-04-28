@@ -97,7 +97,7 @@ class Reserva extends Model{
 	}
 	public function verificarCarroDisponibilidade($carro,$data_inicio,$data_fim){
 
-		$sql="SELECT * FROM tb_aluguel WHERE id_carro = :carro AND (data_inicio>:data_fim OR data_fim<:data_inicio)";
+		$sql="SELECT * FROM tb_aluguel WHERE id_carro = :carro AND NOT((data_inicio>:data_fim OR data_fim<:data_inicio))";
 		$sql=$this->pdo->prepare($sql);
 		$sql->bindValue(":carro",$carro);
 		$sql->bindValue(":data_inicio",$data_inicio);
@@ -106,11 +106,11 @@ class Reserva extends Model{
 
 		if ($sql->rowCount() > 0) {
 			
-			return TRUE;
+			return FALSE;
 		}
 		else{
 
-			return FALSE;
+			return TRUE;
 		}
 
 

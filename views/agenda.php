@@ -37,7 +37,7 @@
 		</div>
 		<div class="col-6">
 			<a class="link" href="<?php echo BASE_URL;?>agenda/add_reserva" data-toggle="modal" data-target=".bd-example-modal-lg">
-				<div  class="card text-white bg-dark mb- mx-auto mt-4" style="max-width: 18rem;">
+				<div id="link"  class="card text-white bg-dark mb- mx-auto mt-4" style="max-width: 18rem;">
 					<div class="card-body">
 						<h2 class="card-title">Adicionar Reserva</h2>
 					</div>

@@ -1,15 +1,15 @@
 $(function(){
 	// hovers do index
-	$('.card').hover(
+	$('.link').hover(
 
 		function() {
-			$(this).removeClass("bg-dark text-white");
-			$(this).addClass('bg-light text-dark');
+			$(this).find('.card').removeClass("bg-dark text-white");
+			$(this).find('.card').addClass('bg-light text-dark');
 
 		},
 		function() {
-			$(this).removeClass("bg-light text-dark");
-			$(this).addClass('bg-dark text-white'); 
+			$(this).find('.card').removeClass("bg-light text-dark");
+			$(this).find('.card').addClass('bg-dark text-white'); 
 		}
 
 		);

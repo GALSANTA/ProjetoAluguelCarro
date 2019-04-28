@@ -33,19 +33,20 @@ class agendaController extends Controller{
 
 		if (!empty($_POST['carro'])) {
 
-			$carro = addslashes($_POST['carro']);
-			$data_inicio = explode("/", addslashes($_POST['data_inicio']));
-			$data_fim =explode("/",addslashes($_POST['data_fim']));
-			$nome = addslashes($_POST['nome']);
-			$rg = addslashes($_POST['rg']);
-			$cpf = addslashes($_POST['cpf']);
-			$numero1 = addslashes($_POST['numero1']);
-			$numero2 = addslashes($_POST['numero2']);
+			$carro = $_POST['carro'];
+			$data_inicio = explode("/", $_POST['data_inicio']);
+			$data_fim =explode("/",$_POST['data_fim']);
+			$nome = $_POST['nome'];
+			$rg = $_POST['rg'];
+			$cpf = $_POST['cpf'];
+			$numero1 = $_POST['numero1'];
+			$numero2 = $_POST['numero2'];
 
 
 
 			$data_inicio = $data_inicio[2]."-".$data_inicio[1]."-".$data_inicio[0];
 			$data_fim = $data_fim[2]."-".$data_fim[1]."-".$data_fim[0];
+
 
 			if ($reserva->verificarCarroDisponibilidade($carro,$data_inicio,$data_fim)) {
 

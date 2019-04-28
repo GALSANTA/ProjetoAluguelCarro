@@ -26,9 +26,9 @@ class clientesController extends Controller{
 			if (empty($_POST['nomefiltro'])) {
 				$valor="";
 			}
-            if ($cliente->getCliente($filtro,$valor)) {
+            if ($cliente->filtroCliente($filtro,$valor)) {
 
-            	$dados['clientes'] = $cliente->getCliente($filtro,$valor);
+            	$dados['clientes'] = $cliente->filtroCliente($filtro,$valor);
             }else{
             	echo "Não há clientes";
             }
@@ -36,6 +36,16 @@ class clientesController extends Controller{
 		}
 
 		$this->loadTemplate('clientes',$dados);
+	}
+	public function historico($id_cliente){
+		$dados = array();
+
+		$cliente = new Cliente();
+
+		$dados['cliente'] = $cliente->getCliente($id_cliente);
+		$dados['historico'] = $cliente->getHistorico($id_cliente); 
+
+		$this->loadTemplate('historico',$dados);
 	}
 
 	
